@@ -1,14 +1,11 @@
 const Router = require('express').Router()
+const { todoList, createTodo, deleteTodo, updateTodo } = require('../controllers/TodoController')
 
 // list 
-Router.get('/', (req, res) => {
-    res.send('get all task')
-})
+Router.get('/', todoList)
 
 // create
-Router.post('/', (req, res) => {
-    res.send('created task')
-})
+Router.post('/', createTodo)
 
 // get single task
 Router.get('/:_id', (req, res) => {
@@ -17,14 +14,10 @@ Router.get('/:_id', (req, res) => {
 
 
 // update
-Router.put('/:_id', (req, res) => {
-    res.send('updated task')
-})
+Router.put('/:_id', updateTodo)
 
 // delete
-Router.delete('/:_id', (req, res) => {
-    res.send('delete task')
-})
+Router.delete('/:_id', deleteTodo)
 
 
 

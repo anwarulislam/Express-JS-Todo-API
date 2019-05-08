@@ -4,6 +4,8 @@ const express = require('express')
 const app = express()
 require('dotenv').config()
 
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 //connect database
 require('./dbconnect')
 
@@ -13,4 +15,6 @@ app.listen(process.env.PORT, () => {
 })
 
 const routerTodos = require('./routes/todos')
+
+// we can use route prefix in front of routerTodos
 app.use(routerTodos)
