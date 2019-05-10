@@ -2,7 +2,22 @@ const Todo = require('../models/Todo')
 
 module.exports.todoList = async (req, res) => {
 
-    let todos = await Todo.find(req.query)
+    const query = () => {
+
+        if (req.query.done) {
+            return req.query
+        }
+
+        if (req.query.today === '' || req.query.today) {
+            return { createdAt: { $gte: new Date() } }
+        }
+
+        return {}
+    }
+
+    console.log(query())
+
+    let todos = await Todo.find(query())
 
     if (todos.length === 0) {
         return res.status(404).json({
