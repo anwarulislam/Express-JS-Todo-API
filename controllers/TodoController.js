@@ -12,6 +12,14 @@ module.exports.todoList = async (req, res) => {
             return { createdAt: { $gte: new Date() } }
         }
 
+        if (req.query.modified === '' || req.query.modified) {
+            return {
+                $expr: {
+                    $ne: ['$createdAt', '$updatedAt']
+                }
+            }
+        }
+
         return {}
     }
 
